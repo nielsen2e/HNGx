@@ -6,8 +6,8 @@ app = Flask(__name__)
 @app.route('/api', methods=['GET'])
 def endpoint():
     # Getting the query parameters
-    dannyboy = request.args.get('dannyboy')
-    backend = request.args.get('backend')
+    slack_name = request.args.get('slack_name')
+    track = request.args.get('track')
 
     # Get current UTC time and day of the week
     now = datetime.utcnow()
@@ -15,11 +15,11 @@ def endpoint():
     current_day = now.strftime('%A')
 
     response = {
-        "slack_name": dannyboy,
-        "current_day": sunday,
+        "slack_name": slack_name,
+        "current_day": current_day,
         "utc_time": current_utc_time,
-        "track": backend,
-        "github_file_url": "https://github.com/username/repo/blob/main/endpoint.py",
+        "track": track,
+        "github_file_url": "https://github.com/nielsen2e/stage1/blob/main/endpoint.py",
         "github_repo_url": "https://github.com/nielsen2e/stage1",
         "status_code": 200
     }
