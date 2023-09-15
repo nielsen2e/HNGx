@@ -1,73 +1,71 @@
 require('dotenv').config();
 const express = require('express')
 const mongoose = require('mongoose')
-const Product = require('./models/productModel')
+const Person = require('./models/personModel')
 const app = express()
 
 app.use(express.json())
 
 //routes
 
-// Fetch all products
+// Fetch all names
 app.get('/api', async(req, res) => {
     try {
-        const products = await Product.find({});
-        res.status(200).json(products)
+        const person = await Person.find({});
+        res.status(200).json({person: person})
     } catch (error) {
         res.status(500).json({message: error.message})
     }   
 })
 
-// Fetch product by id
+// Fetch person by id
 app.get('/api/:id', async(req, res) => {
     try {
         const {id} = req.params;
-        const product = await Product.findById(id);
-        res.status(200).json(product)
+        const person = await Person.findById(id);
+        res.status(200).json(person)
     } catch (error) {
         res.status(500).json({message: error.message})  
     }
 })
 
-// Add a product
+// Add person
 app.post('/api', async(req, res) => {
     try {
-       const product = await Product.create(req.body)
-       res.status(200).json(product);
-
+       const person = await Person.create(req.body)
+       res.status(200).json({person: person});
     } catch (error) {
        console.log(error.message);
        res.status(500).json({message: error.message}) 
     }
 })
 
-//update a product
+//update a person
 app.put('/api/:id', async(req, res) => {
     try {
         const {id} = req.params;
-        const product = await Product.findByIdAndUpdate(id, req.body);
-        // we cannot find any product in database
-        if(!product){
-            return res.status(404).json({message: `cannot find any product with ID ${id}`})
+        const person = await Person.findByIdAndUpdate(id, req.body);
+        // we cannot find such person in database
+        if(!person){
+            return res.status(404).json({message: `cannot find person with ID ${id}`})
         }
-        const updatedProduct = await Product.findById(id);
-        res.status(200).json(updatedProduct);
+        const updatedPerson = await Person.findById(id);
+        res.status(200).json(updatedPerson);
         
     } catch (error) {
         res.status(500).json({message: error.message})
     }
 })
 
-//delete a product
+//delete a person
 app.delete('/api/:id', async(req, res) =>{
     try {
         const {id} = req.params;
-        const product = await Product.findByIdAndDelete(id);
-        if(!product){
-            return res.status(404).json({message: `cannot find any product with ID ${id}`})
+        const person = await Person.findByIdAndDelete(id);
+        if(!person){
+            return res.status(404).json({message: `cannot find any person with ID ${id}`})
         }
-        res.status(200).json(product);
-        
+        res.status(200).json({message: `user with this ID ${id} has been deleted`}); 
     } catch (error) {
         res.status(500).json({message: error.message})
     }
