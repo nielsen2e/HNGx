@@ -11,7 +11,7 @@ app.use(express.json())
 // Fetch all names
 app.get('/api', async(req, res) => {
     try {
-        const person = await Person.find({});
+        const person = await Person.find({}, 'id name');
         res.status(200).json({person: person})
     } catch (error) {
         res.status(500).json({message: error.message})
