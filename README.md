@@ -10,7 +10,7 @@ The API is fully documented, and can be found [here](https://documenter.getpostm
 
 ## UML Diagram
 
-![UML Diagram](image.png)
+![UML Diagram](model.jpg)
 
 ## Testing
 
