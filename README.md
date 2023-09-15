@@ -29,9 +29,9 @@ This API assumes that product records are uniquely identified by their _id provi
 * Change Branch
   ```git checkout stage2```
 * Install the required packages:
-  ```npm install express mongoose body-parser```
+  ```npm install express mongoose body-parser nodemon dotenv```
 * Ensure you have MongoDB installed and running.
 * Run the application:
-  ``` node index.js ```
+  ``` npm run dev ```
 * The API will be accessible locally at <http://127.0.0.1:3000/api>
 
